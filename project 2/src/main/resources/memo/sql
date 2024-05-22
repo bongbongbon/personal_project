@@ -1,0 +1,2 @@
+INSERT INTO Store (USERNAME , STORE_NAME , STORE_LOCATION , STORE_DETAIL_LOCATION , STORE_DESCRIPTION )
+VALUES (1, 'Store Name', 'Location', 'Detail Location', 'Description');

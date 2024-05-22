@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js" /></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        function openZipSearch() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                var addr = '';
+                if (data.userSelectedType === 'R') {
+                    addr = data.roadAddress;
+                } else {
+                    addr = data.jibunAddress;
+                }
+
+                $("#storeLocation").val(addr);
+                $("#storeDetailLocation").val("");
+                $("#storeDetailLocation").focus();
+                }
+            }).open();
+        }
+    </script>
+</head>
+<body>
+
+<form th:action="@{/store/create}" th:object="${storeCreateForm}" method="post">
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">
+            입력해주세요.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">상점명</label>
+        <input type="text" th:field="*{storeName}" class="form-control">
+    </div>
+    <div class="error-class" th:errors="*{storeName}"></div>
+
+    <div class="mb-3">
+        <label for="storeLocation" class="form-label">주소</label>
+        <div>
+            <input  th:field="*{storeLocation}" type="text"  id="storeLocation" name="storeLocation" onclick="openZipSearch();" readonly="readonly" placeholder="기본주소"  style="width:250px;">
+        </div>
+    </div>
+    <div class="error-class" th:errors="*{storeLocation}"></div>
+
+
+    <div class="mb-3">
+        <label for="storeDetailLocation" class="form-label">상세주소</label>
+        <div>
+            <input type="text" th:field="*{storeDetailLocation}"  id="storeDetailLocation" name="storeLocation" placeholder="상세주소"  style="width:250px;">
+        </div>
+    </div>
+    <div class="error-class" th:errors="*{storeDetailLocation}"></div>
+
+    <div class="mb-3">
+        <label class="form-label">상세설명</label>
+        <input type="text" th:field="*{storeDescription}" class="form-control">
+    </div>
+    <div class="error-class" th:errors="*{storeDescription}"></div>
+
+    <button type="submit" class="btn btn-primary">상점등록</button>
+</form>
+
+</body>
+</html>
+
+<style>
+    input {
+        width: 200px;
+    }
+    .error-class {
+        color: red;
+        border-color: red;
+    }
+</style>

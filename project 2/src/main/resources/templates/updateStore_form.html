@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>상점 수정</title>
+</head>
+<body>
+
+<form th:action="@{/store/update/${store.id}}" method="post">
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">
+            입력해주세요.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="storeName" class="form-label">상점명</label>
+        <input type="storeName" name="storeName" id="storeName" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="storeLocation" class="form-label">주소</label>
+        <div>
+            <input type="text"  id="storeLocation" name="storeLocation" onclick="openZipSearch();" readonly="readonly" placeholder="기본주소"  style="width:250px;">
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="storeDetailLocation" class="form-label">상세주소</label>
+        <div>
+            <input type="text"  id="storeDetailLocation" name="storeLocation" placeholder="상세주소"  style="width:250px;">
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="storeDescription" class="form-label">상세설명</label>
+        <input type="storeDescription" name="storeDescription" id="storeDescription" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">상점등록</button>
+</form>
+
+</body>
+</html>

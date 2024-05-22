@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>상점예약리스트</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>예약자 아이디</th>
+        <th>예약 시간</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reservation : ${reservations}">
+        <td th:text="${reservation.username.username}"></td>
+        <td th:text="${reservation.reservationTime}"></td>
+        <td>
+            <form th:action="@{/reservation/status/{id}(id=${reservation.id})}" method="post">
+                <button type="submit" class="btn btn-primary" th:text="${reservation.status}"></button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

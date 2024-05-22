@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/home">HOME</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/store/list}">상점</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasRole('PARTNER')" method="get">
+                    <a class="nav-link" th:href="@{/reservation/list}">예약리스트</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/review/write}">상점리뷰쓰기(방문완료된 상점만 리뷰작성가능)</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+</html>

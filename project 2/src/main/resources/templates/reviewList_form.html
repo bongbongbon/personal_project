@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>리뷰리스트</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+</head>
+<body>
+<table class="table">
+    <thead class="table-dark">
+    </thead>
+    <tbody>
+    <tr th:each="review : ${reviews}">
+        <td>
+            <a th:href="@{|/review/detail/${review.id}|}" th:text="${review.subject}"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
